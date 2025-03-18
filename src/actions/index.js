@@ -21,3 +21,28 @@ export async function fetchAllProducts() {
     };
   }
 }
+
+//get Single Product Details
+export const fetchSingleProductDetails = async (productId) => {
+  try {
+    const response = await fetch(
+      `https://dummyjson.com/products/${productId}`,
+      {
+        method: "GET",
+        cache: "no-store",
+      }
+    );
+    const result = await response.json();
+    // console.log(result);
+    return {
+      success: true,
+      data: result,
+      message: "Product details fetched successfully",
+    };
+  } catch (error) {
+    return {
+      success: false,
+      message: "Something went wrong",
+    };
+  }
+};
