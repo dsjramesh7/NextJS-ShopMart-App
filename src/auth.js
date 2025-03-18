@@ -2,7 +2,7 @@ import NextAuth from "next-auth";
 import Github from "next-auth/providers/github";
 
 export const {
-  headers: { GET, POST },
+  handlers: { GET, POST },
   auth,
   signIn,
   signOut,
