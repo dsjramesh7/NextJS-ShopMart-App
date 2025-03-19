@@ -1,7 +1,16 @@
 import Link from "next/link";
 import { Button } from "./ui/button";
+import { loginAction, logoutAction } from "@/actions";
 
-const Header = () => {
+const Header = ({ getSession }) => {
+  console.log(getSession, "getSessions in header");
+  const handleOauthSignIn = async () => {
+    await loginAction();
+  };
+
+  const handleOauthSignOut = async () => {
+    await logoutAction();
+  };
   return (
     <div className="flex shadow-md py-4 px-6 bg-white min-h[70px] tracking-wide">
       <div className="flex flex-wrap items-center justify-between gap-5 w-full">
@@ -18,9 +27,11 @@ const Header = () => {
             <Link href={"/cart"}>Cart</Link>
           </li>
         </ul>
-        <div>
-          <Button>Login</Button>
-        </div>
+        <form
+          action={getSession?.user ? handleOauthSignOut : handleOauthSignIn}
+        >
+          <Button type="submit">{getSession?.user ? "Logout" : "Login"}</Button>
+        </form>
       </div>
     </div>
   );

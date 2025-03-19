@@ -2,13 +2,15 @@
 
 import Header from "@/components/Header";
 import store from "@/store";
+import { Suspense } from "react";
 import { Provider } from "react-redux";
+import loading from "@/app/loading";
 
-const ReduxProvider = ({ children }) => {
+const ReduxProvider = ({ children, getSession }) => {
   return (
     <Provider store={store}>
-      <Header />
-      {children}
+      <Header getSession={getSession} />
+      <Suspense fallback={<loading />}>{children}</Suspense>
     </Provider>
   );
 };
