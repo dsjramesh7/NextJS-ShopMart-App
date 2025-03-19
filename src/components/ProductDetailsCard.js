@@ -1,10 +1,23 @@
 "use client";
+import { addToCart, removeFromCart } from "@/store/slices/cart-slice";
 import Image from "next/image";
+import { useDispatch, useSelector } from "react-redux";
 
 const ProductDetailsCard = ({ productdetails }) => {
-  const { title, description, category, price, rating, stock, thumbnail } =
+  const { id, title, description, category, price, rating, stock, thumbnail } =
     productdetails;
+  const dispatch = useDispatch();
+  const { cart } = useSelector((state) => state);
+  // console.log(getState);
+  console.log(cart?.cartItems);
 
+  const handleAddCArt = () => {
+    dispatch(addToCart(productdetails));
+  };
+  const handleRemoveCart = () => {
+    dispatch(removeFromCart(id));
+  };
+  const cartthing = cart?.cartItems;
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 p-6">
       <div className="max-w-4xl w-full bg-white shadow-xl rounded-lg overflow-hidden border border-gray-200 p-6 flex flex-col md:flex-row gap-8">
@@ -54,8 +67,18 @@ const ProductDetailsCard = ({ productdetails }) => {
 
           {/* Action Buttons */}
           <div className="mt-6 flex gap-4">
-            <button className="w-1/2 bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg shadow-md transition duration-300">
-              Add to Cart 🛒
+            <button
+              type="button"
+              onClick={
+                cartthing.some((item) => item.id === id)
+                  ? handleRemoveCart
+                  : handleAddCArt
+              }
+              className="w-1/2 bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg shadow-md transition duration-300"
+            >
+              {cartthing.some((item) => item.id === id)
+                ? "Remove from Cart"
+                : "Add to Cart"}
             </button>
             <button className="w-1/2 bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-lg shadow-md transition duration-300">
               Buy Now ⚡

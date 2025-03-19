@@ -4,7 +4,7 @@ import React from "react";
 
 const ProductDetailsPage = async ({ params }) => {
   const getProductDetails = await fetchSingleProductDetails(params?.details);
-  console.log("pro", getProductDetails?.data);
+  // console.log("pro", getProductDetails?.data);
   return (
     <div>
       {getProductDetails?.data ? (
