@@ -8,16 +8,16 @@ const ProductDetailsCard = ({ productdetails }) => {
     productdetails;
   const dispatch = useDispatch();
   const { cart } = useSelector((state) => state);
-  // console.log(getState);
-  console.log(cart?.cartItems);
+  // console.log(cart?.cartItems);
+  const cartthing = cart?.cartItems;
 
+  // functions for adding and removing the cart Items
   const handleAddCArt = () => {
     dispatch(addToCart(productdetails));
   };
   const handleRemoveCart = () => {
     dispatch(removeFromCart(id));
   };
-  const cartthing = cart?.cartItems;
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 p-6">
       <div className="max-w-4xl w-full bg-white shadow-xl rounded-lg overflow-hidden border border-gray-200 p-6 flex flex-col md:flex-row gap-8">
